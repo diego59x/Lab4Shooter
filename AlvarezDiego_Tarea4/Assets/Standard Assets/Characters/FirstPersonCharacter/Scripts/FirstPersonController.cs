@@ -16,9 +16,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [RequireComponent(typeof (AudioSource))]
     public class FirstPersonController : MonoBehaviour
     {
+
         private bool isPaused = false;
         public GameObject pauseMenu;
-
+        
+        private int contador = 0;
+        public Text scoreText;
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private float m_WalkSpeed;
         [SerializeField] private float m_RunSpeed;
@@ -54,6 +57,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Use this for initialization
         private void Start()
         {
+            
+            scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
             Time.timeScale = 1.0f;
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
@@ -95,14 +100,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
             //mio
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 isPaused = true;
                 TogglePause();
                 
             }
+            if (scoreText)
+            {
+                scoreText.text = "Coins Destroyed: " + contador.ToString();
+            }
             if (Input.GetMouseButtonDown(0))
             {
+               
                 Ray myRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
                 RaycastHit hitInfo;
                 if(Physics.Raycast(myRay, out hitInfo))
@@ -112,6 +122,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         || hitInfo.collider.CompareTag("Moneda5") || hitInfo.collider.CompareTag("Moneda6"))
                         {
                         Destroy(hitInfo.collider.gameObject);
+                        contador += 1;
                         }
                         
                 }

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ChangeColor : MonoBehaviour
 {
+
     public Rigidbody rb;
+    public Camera mouse;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,7 @@ public class ChangeColor : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray myRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+            Ray myRay = mouse.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
             if (Physics.Raycast(myRay, out hitInfo))
             {
@@ -24,7 +26,7 @@ public class ChangeColor : MonoBehaviour
                 {
                     rb = hitInfo.collider.GetComponent<Rigidbody>();
                     if (rb)
-                        rb.AddForce(-hitInfo.normal * 10, ForceMode.Impulse);
+                        rb.AddForce(-hitInfo.normal * 5, ForceMode.Impulse);
                 }
 
             }
@@ -33,5 +35,9 @@ public class ChangeColor : MonoBehaviour
     private void OnMouseOver()
     {
         GetComponent<MeshRenderer>().material.color = Color.red;
+    }
+    private void OnMouseExit()
+    {
+        GetComponent<MeshRenderer>().material.color = Color.white;
     }
 }

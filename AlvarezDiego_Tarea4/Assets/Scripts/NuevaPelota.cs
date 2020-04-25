@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class NuevaPelota : MonoBehaviour
 {
-    public GameObject prefab;
+    
     private bool isPaused = false;
     public GameObject pauseMenu;
-    private GameObject esfera;
+    
     
     // Start is called before the first frame update
 
@@ -17,8 +17,6 @@ public class NuevaPelota : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
-        if (prefab)
-            esfera = Instantiate(prefab, transform.position, transform.rotation);
         
         
     }
@@ -26,11 +24,7 @@ public class NuevaPelota : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && !esfera)
-        {
-            nuevo();
-            StartGame();
-        }
+        
         if (Input.GetKeyDown(KeyCode.P))
         {
             isPaused = true;
@@ -44,11 +38,7 @@ public class NuevaPelota : MonoBehaviour
 
 
     }
-    public GameObject nuevo()
-    {
-        esfera = Instantiate(prefab, transform.position, transform.rotation);
-        return esfera;
-    }
+
     public void TogglePause()
     {
         if (pauseMenu)

@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 268118950}
+  mouse: {fileID: 963194227}
 --- !u!136 &268118946
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -354,6 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 515116909}
+  mouse: {fileID: 963194227}
 --- !u!54 &515116909
 Rigidbody:
   m_ObjectHideFlags: 0
